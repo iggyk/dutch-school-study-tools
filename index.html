@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Math</title>
+        <style>
+            html { padding: 0; margin: 0; }
+            body { padding: 20px; font: 2em normal Calibri; }
+            .item {
+                width: 40%;
+                display: inline-block;
+                border-bottom: 1px solid #f0f0f0;
+                margin: 5px;
+            }
+            .number {
+                width: 10%;
+                display: inline-block;
+            }
+            .sign {
+                width: 5%;
+                display: inline-block;
+            }
+        </style>
+        <script>
+			function q(key) {
+				const s = document.location.search.replace('?','').split('&').map(a => ({ key: a.split('=')[0], val: a.split('=')[1] }));
+				const v = s.find(x => x.key === key);
+				return v ? v.val : undefined;
+			}
+            function generate(numPlus, onlyPlus = false, onlyMinus = false) {
+                const items = [];
+                while (numPlus--) {
+                    items.push(generateLine(onlyPlus, onlyMinus))
+                }
+                document.body.innerHTML = items.join("");
+            }
+
+            function generateLine(onlyPlus, onlyMinus) {
+                let num1 = Math.floor(Math.random() * 60)+1;
+                let num2 = Math.floor(Math.random() * 60)+1;
+                const isMinus = onlyMinus || (!onlyPlus && Math.random() > 0.5);
+				if (num1 === num2 && Math.random() > 0.4) {
+					num2 = Math.floor(Math.random() * 50);
+				}
+                if (isMinus && num1 < num2) {
+                    const a = num1;
+                    num1 = num2;
+                    num2 = a;
+                }
+                return `
+                    <div class="item">
+                        <span class="number">${num1}</span>&nbsp;<span class="sign">${isMinus ? "‒" : "+"}</span>&nbsp;<span class="number">${num2}</span>&nbsp;=
+                    </div>
+                `
+            }
+        </script>
+    </head>
+    <body onload="generate(parseInt(q('num'),10) || 30, q('onlyPlus') === 'true' || false, q('onlyMinus') === 'true' || false)">
+    </body>    
+</html>

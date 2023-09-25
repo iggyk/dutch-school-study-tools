@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Clock practice</title>
+    <script src="./clock.js"></script>
+    <style>
+        html,
+        body {
+            font: normal 1em sans-serif;
+        }
+
+        .unprintable label {
+            border-left: 1px solid #aaa;
+            padding-left: 20px;
+            padding-right: 5px;
+        }
+
+        .unprintable input {
+            margin-right: 20px;
+        }
+
+        .unprintable *,
+        .unprintable {
+            vertical-align: middle;
+        }
+
+        @media print {
+            .unprintable {
+                display: none;
+            }
+        }
+
+        #workarea {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #workarea .label {
+            text-align: center;
+        }
+
+        #workarea .wrapper {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body onload="redraw()">
+    <div class="unprintable">
+        <label for="numClocks">Number of clocks</label><input id="numClocks" type="number" value="20"
+            onchange="redraw()" />
+        <label for="showLabels">Show labels</label><input type="checkbox" id="showLabels" checked onchange="redraw()" />
+        <label for="showHours">Show hour hand</label><input type="checkbox" id="showHours" checked
+            onchange="redraw()" />
+        <label for="showMinutes">Show minute hand</label><input type="checkbox" id="showMinutes" checked
+            onchange="redraw()" />
+    </div>
+    <div class="printable" id="workarea"></div>
+</body>
+
+</html>

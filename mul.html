@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Math</title>
+        <style>
+            html { padding: 0; margin: 0; }
+            body { padding: 20px; font: 2em normal Calibri; }
+            .item {
+                width: 40%;
+                display: inline-block;
+                border-bottom: 1px solid #f0f0f0;
+                margin: 5px;
+            }
+            .number {
+                width: 10%;
+                display: inline-block;
+            }
+            .sign {
+                width: 5%;
+                display: inline-block;
+            }
+        </style>
+        <script>
+			function getQuery(name) {
+				if (!document.location.search) return '';
+				const strs = document.location.search.replace("?","").split("&");
+				for (let i = 0; i < strs.length; i++) {
+					const [key, val] = strs[i].split("=");
+					if (key === name) return val;
+				}
+				return '';
+			}
+            function generate() {
+				let numPlus = getQuery('num') ? parseInt(getQuery('num')) : 30;
+                const items = [];
+                while (numPlus--) {
+                    items.push(generateLine())
+                }
+                document.body.innerHTML = items.join("");
+            }
+
+            function generateLine() {
+                let num1 = Math.ceil(Math.random() * 9);
+                let num2 = Math.ceil(Math.random() * 10);
+                return `
+                    <div class="item">
+                        <span class="number">${num1}</span>&nbsp;<span class="sign">x</span>&nbsp;<span class="number">${num2}</span>&nbsp;=
+                    </div>
+                `
+            }
+        </script>
+    </head>
+    <body onload="generate()">
+    </body>    
+</html>

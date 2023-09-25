@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Spelling</title>
+    <script src='./dutch-russian-db-full.js'></script>
+    <script>
+        const numWords = 6;
+		const offset = 6;
+		const randomize = false;
+        const numLines = 5;
+        function generate() {
+            let i = numWords;
+            const list = [];
+			const finalWords = offset ? words.splice(offset) : words;
+            while (i-- > 0 && words.length) {
+                const wordIndex = randomize ? Math.floor(Math.random() * finalWords.length) : 0;
+                const [word] = finalWords.splice(wordIndex, 1);
+                console.log(word);
+                list.push(word);
+            }
+            const filler = new Array(numLines - 2).fill(0).map(_ => "<tr><td class='decor-top'></td></tr>").join('');
+            const lines = list.map(words => `<tr><td rowspan='${numLines}' class='word'><div>${words[0].toLowerCase()}</div><div>${words[1].toLowerCase()}</div></td><td class='decor-top'></td></tr>${filler}<tr><td class='decor-bottom'></td></tr>`);
+            document.body.innerHTML = `<table><tbody>${lines.join('<tr><td colspan="2" class="mid"></td></tr>')}</tbody></table>`;
+        }
+    </script>
+    <style>
+        * {
+            font-family: Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 18px;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 10px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        .word {
+            padding-right: 20px;
+            vertical-align: top;
+        }
+
+        .word div+div {
+            color: #aaa;
+        }
+
+        .mid {
+            height: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .decor-top {
+            border-bottom: 1px solid #e0e0e0;
+            width: 100%;
+            height: 1.3em;
+        }
+
+        .decor-bottom {
+            border-bottom: 1px solid #a0a0a0;
+            width: 100%;
+            height: 1.3em;
+        }
+    </style>
+</head>
+
+<body onload="generate()">
+
+</body>
+
+</html>

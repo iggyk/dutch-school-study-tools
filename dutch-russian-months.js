@@ -1,0 +1,1 @@
+const words = [["januari","Январь"],["februari","Февраль"],["maart","Март"],["april","Апрель"],["mei","Май"],["juni","Июнь"],["juli","Июль"],["augustus","Август"],["september","Сентябрь"],["oktober","Октябрь"],["november","Ноябрь"],["december","Декабрь"]];

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+    <title>Spelling</title>
+	<script src='./dutch.js'></script>
+    <script>
+        const numWords = 30;
+        function generate() {
+            let i = numWords;
+            const list = [];
+            while (i-- > 0 && extraWords.length) {
+                const wordIndex = Math.floor(Math.random() * extraWords.length);
+                const [word] = extraWords.splice(wordIndex, 1);
+                list.push(word.toLowerCase());
+            }
+            const lines = list.map(word => `<tr><td rowspan='2' class='word'>${word}</td><td class='decor-top'></td></tr><tr><td class='decor-bottom'></td></tr>`);
+            document.body.innerHTML = `<table><tbody>${lines.join('<tr><td colspan="2" class="mid"></td></tr>')}</tbody></table>`;
+        }
+    </script>
+    <style>
+        * {
+            font-family: Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 18px;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 10px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        .word {
+            padding-right: 20px;
+            vertical-align: top;
+        }
+
+        .mid {
+            height: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .decor-top {
+            border-bottom: 1px solid #e0e0e0;
+            width: 100%;
+            height: 1em;
+        }
+
+        .decor-bottom {
+            border-bottom: 1px solid #a0a0a0;
+            width: 100%;
+            height: 1em;
+        }
+    </style>
+</head>
+
+<body onload="generate()">
+
+</body>
+
+</html>
